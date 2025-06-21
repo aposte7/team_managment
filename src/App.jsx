@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BiCloset, BiPlus } from "react-icons/bi";
 import { CgAdd } from "react-icons/cg";
 import { GrClose } from "react-icons/gr";
@@ -8,10 +9,13 @@ import { IoClose } from "react-icons/io5";
 import { LuSettings } from "react-icons/lu";
 
 import { RiAdminLine } from "react-icons/ri";
+import CreateMembers from "./features/members/CreateMembers";
 
 function App() {
+  const [showCreate, setShowCreate] = useState(false);
   return (
     <div className="grid h-dvh grid-cols-[17rem_1fr] bg-amber-200">
+      {showCreate && <CreateMembers close={() => setShowCreate(false)} />}
       <aside className="h-full overflow-hidden bg-white">
         <div className="bg-blue-400 p-2 text-center text-[1.6rem] font-semibold text-white">
           Evangelism Team
@@ -91,7 +95,10 @@ function App() {
               <div className="flex items-center gap-1">
                 <span className="text-lg text-gray-800">Filter </span>
               </div>
-              <button className="col-start-4 flex w-fit cursor-pointer items-center gap-2 rounded bg-black px-3 text-white">
+              <button
+                onClick={() => setShowCreate(true)}
+                className="col-start-4 flex w-fit cursor-pointer items-center gap-2 rounded bg-black px-3 text-white"
+              >
                 <span>Add</span> <BiPlus size={22} />
               </button>
             </div>
