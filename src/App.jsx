@@ -1,7 +1,10 @@
-import { BiPlus } from "react-icons/bi";
+import { BiCloset, BiPlus } from "react-icons/bi";
 import { CgAdd } from "react-icons/cg";
+import { GrClose } from "react-icons/gr";
 import { HiOutlineHome, HiOutlineUserGroup } from "react-icons/hi";
 import { HiOutlineCalendarDays } from "react-icons/hi2";
+import { IoIosClose } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import { LuSettings } from "react-icons/lu";
 
 import { RiAdminLine } from "react-icons/ri";
