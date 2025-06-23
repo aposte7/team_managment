@@ -1,11 +1,12 @@
 import { HiEllipsisVertical } from "react-icons/hi2";
 
 import Menus from "../../components/Menus";
+import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 
 function MembersTable() {
   return (
-    <div className="h-dvh w-full">
-      <div className="rounded-lg border bg-white shadow-sm">
+    <div className="w-full">
+      <div className="rounded-lg border border-gray-100 bg-white">
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100">

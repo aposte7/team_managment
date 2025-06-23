@@ -3,7 +3,7 @@ import SideBar from "../components/SideBar";
 
 function AppLayout() {
   return (
-    <div className="grid h-dvh grid-cols-[17rem_1fr] bg-amber-200">
+    <div className="grid h-dvh grid-cols-[17rem_1fr] bg-amber-500">
       {/* // Use This in the home page make user to make it mobile responsive
                   
                   <div className="h-full bg-gray-50">
@@ -39,7 +39,7 @@ function AppLayout() {
                     </div>
                   </div>  */}
       <SideBar />
-      <main className="bg-stone-100 px-5 pt-4">{<Outlet />}</main>
+      <main className="bg-blue-50 px-5 pt-4">{<Outlet />}</main>
     </div>
   );
 }

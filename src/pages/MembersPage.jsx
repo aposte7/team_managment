@@ -4,7 +4,7 @@ import TableOperation from "../components/TableOperation";
 
 function MembersPage() {
   return (
-    <div className="space-y-10 bg-white p-1 px-4 py-3">
+    <div className="h-fit space-y-10 bg-white p-4">
       {/* Main page with table and <search></search> */}
       <TableOperation />
 
