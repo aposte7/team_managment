@@ -21,7 +21,7 @@ function TableOperation() {
             <span>Add</span> <BiPlus size={22} />
           </button>
         </Modal.Open>
-        <Modal.View name="member-form">
+        <Modal.View title="add new members" name="member-form">
           <CreateMembers />
         </Modal.View>
       </header>

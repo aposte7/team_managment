@@ -22,15 +22,20 @@ function Open({ name, children }) {
   return cloneElement(children, { onClick: () => openModal(name) });
 }
 
-function View({ name, children }) {
+function View({ name, children, title }) {
   const { closeModal, modelName } = useContext(FormContext);
 
   if (modelName != name) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 h-dvh w-full bg-gray-200/45 backdrop-blur-[4px]">
-      <div className="absolute top-1/2 left-1/2 -translate-1/2 bg-white p-4">
-        <div className="text-right">
+    <div className="fixed inset-0 z-50 h-dvh w-full bg-black/50">
+      <div className="absolute top-1/2 left-1/2 h-fit -translate-1/2 rounded-lg bg-white">
+        <div className="flex items-center justify-between border-b border-b-gray-200 p-6">
+          {title && (
+            <h3 className="text-2xl font-semibold text-gray-800 capitalize">
+              {title}
+            </h3>
+          )}
           <button
             onClick={() => closeModal()}
             className="cursor-pointer rounded-md bg-white p-1.5 hover:bg-gray-100"

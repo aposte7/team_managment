@@ -22,12 +22,8 @@ function CreateMembers({ closeModal }) {
   const tabs = ["basic", "additional"];
 
   return (
-    <div className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto bg-white">
-      <div className="flex items-center justify-between px-6 py-3">
-        <h3 className="text-2xl font-semibold text-gray-800">Add New Member</h3>
-      </div>
-
-      <div className="px-6 py-4">
+    <div className="relative w-full overflow-y-auto rounded-lg bg-white">
+      <div className="px-6 py-6">
         <div className="mb-5 flex gap-2">
           {tabs.map((tab) => (
             <button
@@ -61,7 +57,7 @@ function CreateMembers({ closeModal }) {
                     id="firstName"
                     type="text"
                     placeholder="e.g. John"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -75,7 +71,7 @@ function CreateMembers({ closeModal }) {
                     id="fatherName"
                     type="text"
                     placeholder="e.g. Doe"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -85,15 +81,15 @@ function CreateMembers({ closeModal }) {
                   >
                     Phone Number *
                   </label>
-                  <div className="flex">
-                    <span className="inline-flex items-center rounded-l-md border bg-gray-100 px-3 text-gray-700">
+                  <div className="flex items-center">
+                    <span className="mt-1 inline-flex items-center rounded-l-md border bg-gray-100 px-3 py-[8px] text-gray-500">
                       +251
                     </span>
                     <input
                       id="phone"
                       type="text"
-                      className="w-full rounded-r-md border px-3 py-2"
-                      placeholder="912345678"
+                      placeholder="955485444"
+                      className="mt-1 w-full rounded-r-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                     />
                   </div>
                 </div>
@@ -108,7 +104,7 @@ function CreateMembers({ closeModal }) {
                     id="telegramHandler"
                     type="text"
                     placeholder="@username"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
 
@@ -133,6 +129,7 @@ function CreateMembers({ closeModal }) {
                     ))}
                   </div>
                 </div>
+
                 <div className="space-y-2 md:col-span-2">
                   <label
                     htmlFor="department"
@@ -144,7 +141,7 @@ function CreateMembers({ closeModal }) {
                     id="department"
                     type="text"
                     placeholder="e.g. Software Engineering"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -157,7 +154,7 @@ function CreateMembers({ closeModal }) {
                   <input
                     id="date"
                     type="date"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
               </div>
@@ -178,7 +175,7 @@ function CreateMembers({ closeModal }) {
                     id="prevChurch"
                     type="text"
                     placeholder="e.g. Mulu Wongel"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -192,7 +189,7 @@ function CreateMembers({ closeModal }) {
                     id="prevService"
                     type="text"
                     placeholder="e.g. Choir"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -206,11 +203,11 @@ function CreateMembers({ closeModal }) {
                     id="department"
                     type="text"
                     placeholder="e.g. Software Engineering"
-                    className="mt-1 w-full rounded-md border px-3 py-2"
+                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-2 md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700">
                     Profile Photo
                   </label>
@@ -228,12 +225,21 @@ function CreateMembers({ closeModal }) {
                         </div>
                       )}
                     </div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="text-sm"
-                    />
+                    <div className="flex items-center gap-5 py-4">
+                      <label
+                        htmlFor="photoInput"
+                        className="inline-block w-fit cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+                      >
+                        Upload
+                      </label>
+                      <input
+                        id="photoInput"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className=""
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
