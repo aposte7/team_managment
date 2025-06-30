@@ -3,6 +3,9 @@ import { HiOutlineCalendarDays } from "react-icons/hi2";
 import { LuSettings } from "react-icons/lu";
 import { RiAdminLine } from "react-icons/ri";
 import { NavLink } from "react-router";
+import CustomNavLink from "./CustomNavLink";
+
+const BASE_URL = "admin";
 
 function SideBar() {
   return (
@@ -12,42 +15,28 @@ function SideBar() {
       </div>
 
       <div className="space-y-2 px-5 py-10 text-[1.05rem] text-gray-600">
-        <NavLink
-          to="/"
-          className="flex items-center gap-3 rounded-md bg-stone-100 px-6 py-3"
-        >
+        <CustomNavLink to={`${BASE_URL}/dashboard`}>
           <HiOutlineHome size={23} />
           <span> Home</span>
-        </NavLink>
-        <NavLink
-          to="/members"
-          className="flex items-center gap-3 rounded-md px-6 py-3 hover:bg-stone-100 hover:text-gray-800"
-        >
+        </CustomNavLink>
+
+        <CustomNavLink to={`${BASE_URL}/members`}>
           <HiOutlineUserGroup size={23} />
           <span> Members</span>
-        </NavLink>
-        <NavLink
-          to="/plans"
-          className="flex items-center gap-3 rounded-md px-6 py-3 hover:bg-stone-100 hover:text-gray-800"
-        >
+        </CustomNavLink>
+        <CustomNavLink to={`${BASE_URL}/plans`}>
           <HiOutlineCalendarDays size={23} />
           <span> Plans</span>
-        </NavLink>
-        <NavLink
-          to="/admins"
-          className="flex items-center gap-3 rounded px-6 py-3 hover:bg-stone-100 hover:text-gray-800"
-        >
+        </CustomNavLink>
+        <CustomNavLink to={`${BASE_URL}/admins`}>
           <RiAdminLine size={23} />
           <span> Admins</span>
-        </NavLink>
+        </CustomNavLink>
 
-        <NavLink
-          to="settings"
-          className="flex items-center gap-3 rounded-md px-6 py-3 hover:bg-stone-100 hover:text-gray-800"
-        >
+        <CustomNavLink to={`${BASE_URL}/settings`}>
           <LuSettings size={23} />
           <span> Settings</span>
-        </NavLink>
+        </CustomNavLink>
       </div>
     </aside>
   );

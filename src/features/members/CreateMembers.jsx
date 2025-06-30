@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GrClose, GrUser, GrHome, GrCalendar, GrCamera } from "react-icons/gr";
+import FormFields from "../../components/FormFields";
 
 function CreateMembers({ closeModal }) {
   const [preview, setPreview] = useState(null);
@@ -46,42 +47,25 @@ function CreateMembers({ closeModal }) {
           {activeTab === "basic" && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    First Name *
-                  </label>
+                <FormFields label="First Name">
                   <input
                     id="firstName"
                     type="text"
                     placeholder="e.g. John"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="fatherName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Father Name *
-                  </label>
+                </FormFields>
+                <FormFields label="Father Name">
                   <input
                     id="fatherName"
                     type="text"
                     placeholder="e.g. Doe"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Phone Number *
-                  </label>
-                  <div className="flex items-center">
+                </FormFields>
+
+                <FormFields label="Phone Number">
+                  <div formid="phone" className="flex items-center">
                     <span className="mt-1 inline-flex items-center rounded-l-md border bg-gray-100 px-3 py-[8px] text-gray-500">
                       +251
                     </span>
@@ -92,27 +76,18 @@ function CreateMembers({ closeModal }) {
                       className="mt-1 w-full rounded-r-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                     />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="telegramHandler"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Telegram Handle
-                  </label>
+                </FormFields>
+                <FormFields label="Telegram Handler">
                   <input
                     id="telegramHandler"
                     type="text"
                     placeholder="@username"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
+                </FormFields>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Academic Year *
-                  </label>
-                  <div className="grid grid-cols-5 gap-2">
+                <FormFields label="Academic Year *">
+                  <div formid="academicYear" className="grid grid-cols-5 gap-2">
                     {[1, 2, 3, 4, 5].map((year) => (
                       <button
                         key={year}
@@ -128,35 +103,26 @@ function CreateMembers({ closeModal }) {
                       </button>
                     ))}
                   </div>
-                </div>
+                </FormFields>
 
-                <div className="space-y-2 md:col-span-2">
-                  <label
-                    htmlFor="department"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Department *
-                  </label>
+                <FormFields
+                  label="Department"
+                  className="space-y-2 md:col-span-2"
+                >
                   <input
                     id="department"
                     type="text"
                     placeholder="e.g. Software Engineering"
                     className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="date"
-                    className="flex items-center gap-2 text-sm font-medium text-gray-700"
-                  >
-                    <GrCalendar /> Date of Joining
-                  </label>
+                </FormFields>
+                <FormFields label="Date of Joining">
                   <input
                     id="date"
                     type="date"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
+                </FormFields>
               </div>
             </div>
           )}
@@ -164,50 +130,32 @@ function CreateMembers({ closeModal }) {
           {activeTab === "additional" && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="prevChurch"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Previous Church
-                  </label>
+                <FormFields label="Previous Church">
                   <input
                     id="prevChurch"
                     type="text"
                     placeholder="e.g. Mulu Wongel"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="prevService"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Previous Service
-                  </label>
+                </FormFields>
+                <FormFields label="Previous Service">
                   <input
                     id="prevService"
                     type="text"
                     placeholder="e.g. Choir"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
-                <div className="space-y-2 md:col-span-2">
-                  <label
-                    htmlFor="department"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Department *
-                  </label>
+                </FormFields>
+                <FormFields label="Department *" className="md:col-span-2">
                   <input
                     id="department"
                     type="text"
                     placeholder="e.g. Software Engineering"
-                    className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
-                </div>
+                </FormFields>
 
-                <div className="space-y-2 md:col-span-2">
+                <FormFields className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700">
                     Profile Photo
                   </label>
@@ -241,7 +189,7 @@ function CreateMembers({ closeModal }) {
                       />
                     </div>
                   </div>
-                </div>
+                </FormFields>
               </div>
             </div>
           )}
@@ -280,7 +228,7 @@ function CreateMembers({ closeModal }) {
                 </button>
               ) : (
                 <button
-                  type="submit"
+                  type="button"
                   className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
                 >
                   Create Member
