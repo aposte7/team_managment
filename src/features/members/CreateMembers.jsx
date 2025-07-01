@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { GrClose, GrUser, GrHome, GrCalendar, GrCamera } from "react-icons/gr";
 import FormFields from "../../components/FormFields";
+import { useForm } from "react-hook-form";
 
 function CreateMembers({ closeModal }) {
   const [preview, setPreview] = useState(null);
-  const [selectedYear, setSelectedYear] = useState(null);
   const [activeTab, setActiveTab] = useState("basic");
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const selectedYear = watch("academicYear");
 
   function handleImageUpload(event) {
     const file = event.target.files?.[0];
@@ -18,6 +27,11 @@ function CreateMembers({ closeModal }) {
     } else {
       setPreview(null);
     }
+  }
+
+  function onSubmit(data) {
+    console.log("data submitted");
+    console.log(data);
   }
 
   const tabs = ["basic", "additional"];
@@ -43,12 +57,13 @@ function CreateMembers({ closeModal }) {
           ))}
         </div>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
           {activeTab === "basic" && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormFields label="First Name">
                   <input
+                    {...register("firstName")}
                     id="firstName"
                     type="text"
                     placeholder="e.g. John"
@@ -57,6 +72,7 @@ function CreateMembers({ closeModal }) {
                 </FormFields>
                 <FormFields label="Father Name">
                   <input
+                    {...register("fatherName")}
                     id="fatherName"
                     type="text"
                     placeholder="e.g. Doe"
@@ -70,7 +86,8 @@ function CreateMembers({ closeModal }) {
                       +251
                     </span>
                     <input
-                      id="phone"
+                      {...register("phoneNumber")}
+                      id="phoneNumber"
                       type="text"
                       placeholder="955485444"
                       className="mt-1 w-full rounded-r-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
@@ -79,6 +96,7 @@ function CreateMembers({ closeModal }) {
                 </FormFields>
                 <FormFields label="Telegram Handler">
                   <input
+                    {...register("telegramHandler")}
                     id="telegramHandler"
                     type="text"
                     placeholder="@username"
@@ -92,7 +110,7 @@ function CreateMembers({ closeModal }) {
                       <button
                         key={year}
                         type="button"
-                        onClick={() => setSelectedYear(year)}
+                        onClick={() => setValue("academicYear", year)}
                         className={`h-10 rounded-md border font-semibold transition-all duration-200 ${
                           selectedYear === year
                             ? "bg-blue-600 text-white"
@@ -110,6 +128,7 @@ function CreateMembers({ closeModal }) {
                   className="space-y-2 md:col-span-2"
                 >
                   <input
+                    {...register("department")}
                     id="department"
                     type="text"
                     placeholder="e.g. Software Engineering"
@@ -118,7 +137,8 @@ function CreateMembers({ closeModal }) {
                 </FormFields>
                 <FormFields label="Date of Joining">
                   <input
-                    id="date"
+                    {...register("joinedDate")}
+                    id="joinedDate"
                     type="date"
                     className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                   />
@@ -132,7 +152,8 @@ function CreateMembers({ closeModal }) {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormFields label="Previous Church">
                   <input
-                    id="prevChurch"
+                    {...register("previousChurch")}
+                    id="previousChurch"
                     type="text"
                     placeholder="e.g. Mulu Wongel"
                     className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
@@ -140,6 +161,7 @@ function CreateMembers({ closeModal }) {
                 </FormFields>
                 <FormFields label="Previous Service">
                   <input
+                    {...register("prevService")}
                     id="prevService"
                     type="text"
                     placeholder="e.g. Choir"
@@ -148,6 +170,7 @@ function CreateMembers({ closeModal }) {
                 </FormFields>
                 <FormFields label="Department *" className="md:col-span-2">
                   <input
+                    {...register("department")}
                     id="department"
                     type="text"
                     placeholder="e.g. Software Engineering"
@@ -175,13 +198,14 @@ function CreateMembers({ closeModal }) {
                     </div>
                     <div className="flex items-center gap-5 py-4">
                       <label
-                        htmlFor="photoInput"
+                        htmlFor="profileImage"
                         className="inline-block w-fit cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
                       >
                         Upload
                       </label>
                       <input
-                        id="photoInput"
+                        {...register("profileImage")}
+                        id="profileImage"
                         type="file"
                         accept="image/*"
                         onChange={handleImageUpload}
@@ -228,7 +252,7 @@ function CreateMembers({ closeModal }) {
                 </button>
               ) : (
                 <button
-                  type="button"
+                  type="submit"
                   className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
                 >
                   Create Member

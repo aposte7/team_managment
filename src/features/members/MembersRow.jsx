@@ -24,7 +24,7 @@ function MembersRow({ member }) {
       <td className="px-4 py-4 text-center text-slate-600">
         {member.academicYear}
       </td>
-      <td className="px-4 py-4 text-slate-700">{member.phone}</td>
+      <td className="px-4 py-4 text-slate-700">{member.phoneNumber}</td>
       <td className="px-4 py-4 text-center">
         <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
           3.5
