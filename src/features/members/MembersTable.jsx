@@ -1,6 +1,3 @@
-import { HiEllipsisVertical } from "react-icons/hi2";
-
-import Menus from "../../components/Menus";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 import { useMembers } from "./useMembers";
 import MembersRow from "./MembersRow";
@@ -9,7 +6,7 @@ import Spinner from "../../components/Spinners";
 function MembersTable() {
   const { isLoading, members } = useMembers();
 
-  if (true) return <Spinner />;
+  if (isLoading) return <Spinner />;
   return (
     <div className="w-full">
       <div className="rounded-lg border border-gray-100 bg-white">
