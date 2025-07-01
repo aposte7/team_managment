@@ -44,7 +44,7 @@ function View({ name, children, title }) {
           </button>
         </div>
 
-        {cloneElement(children, closeModal)}
+        {cloneElement(children, { closeModal })}
         {/* Add new form */}
       </div>
     </div>,
