@@ -1,6 +1,6 @@
 import { HiEllipsisVertical } from "react-icons/hi2";
 
-function MembersRow({ member }) {
+function MembersRow({ member, rowNumber }) {
   // Get initials from member.name
   const getInitials = (name) => {
     if (!name) return "";
@@ -11,11 +11,21 @@ function MembersRow({ member }) {
 
   return (
     <tr className="border-b border-slate-100 transition-colors hover:bg-slate-50">
-      <td className="px-4 py-4 text-center font-medium text-slate-600">1</td>
+      <td className="px-4 py-4 text-center font-medium text-slate-600">
+        {rowNumber}
+      </td>
       <td className="px-4 py-4 text-center">
         <div className="flex justify-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 font-semibold text-white">
-            {getInitials(member.name)}
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500 font-semibold text-white">
+            {member.profilePicture ? (
+              <img
+                src={member.profilePicture}
+                className="h-full w-full rounded-full object-cover object-center"
+                alt={`${member.name}'s image`}
+              />
+            ) : (
+              <p>{getInitials(member.name)}</p>
+            )}
           </div>
         </div>
       </td>

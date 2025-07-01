@@ -41,7 +41,11 @@ function MembersTable() {
           </thead>
           <tbody>
             {members.map((member, index) => (
-              <MembersRow member={member} key={`${index}${member.id}`} />
+              <MembersRow
+                member={member}
+                rowNumber={index + 1}
+                key={`${index}${member.id}`}
+              />
             ))}
           </tbody>
           <tfoot>
