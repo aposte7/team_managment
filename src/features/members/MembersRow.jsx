@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import { HiEllipsisVertical } from "react-icons/hi2";
+import Menus from "../../components/Menus";
 
-function MembersRow({ member, rowNumber }) {
-  // Get initials from member.name
+const MembersRow = ({ member, rowNumber }) => {
+  const [showMenu, setShowMenu] = useState(false);
+
   const getInitials = (name) => {
     if (!name) return "";
     const parts = name.trim().split(" ");
@@ -10,43 +13,65 @@ function MembersRow({ member, rowNumber }) {
   };
 
   return (
-    <tr className="border-b border-slate-100 transition-colors hover:bg-slate-50">
-      <td className="px-4 py-4 text-center font-medium text-slate-600">
-        {rowNumber}
-      </td>
-      <td className="px-4 py-4 text-center">
-        <div className="flex justify-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500 font-semibold text-white">
+    <>
+      <tr className="transition-colors hover:bg-gray-50">
+        <td className="px-6 py-4 text-center whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{rowNumber}</div>
+        </td>
+
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-orange-600">
             {member.profilePicture ? (
               <img
                 src={member.profilePicture}
-                className="h-full w-full rounded-full object-cover object-center"
-                alt={`${member.name}'s image`}
+                alt={`${member.name}'s profile`}
+                className="h-10 w-10 rounded-full object-cover"
               />
             ) : (
-              <p>{getInitials(member.name)}</p>
+              <span className="text-sm font-medium text-white">
+                {getInitials(member.name)}
+              </span>
             )}
           </div>
-        </div>
-      </td>
-      <td className="px-4 py-4 font-medium text-slate-900">{member.name}</td>
-      <td className="px-4 py-4 text-slate-700">{member.department}</td>
-      <td className="px-4 py-4 text-center text-slate-600">
-        {member.academicYear}
-      </td>
-      <td className="px-4 py-4 text-slate-700">{member.phoneNumber}</td>
-      <td className="px-4 py-4 text-center">
-        <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
-          3.5
-        </span>
-      </td>
-      <td className="px-4 py-4 text-center">
-        <button className="flex h-8 w-8 items-center justify-center rounded p-0 transition-colors hover:bg-slate-200">
-          <HiEllipsisVertical className="h-4 w-4 text-slate-500" />
-        </button>
-      </td>
-    </tr>
+        </td>
+
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm font-medium text-gray-900">{member.name}</div>
+        </td>
+
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm text-gray-600">{member.department}</div>
+        </td>
+
+        <td className="px-6 py-4 text-center whitespace-nowrap">
+          <div className="text-sm text-gray-600">{member.academicYear}</div>
+        </td>
+
+        <td className="px-6 py-4 whitespace-nowrap">
+          <div className="text-sm text-gray-600">{member.phoneNumber}</div>
+        </td>
+
+        <td className="px-6 py-4 text-center whitespace-nowrap">
+          <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
+            3.5 GPA
+          </span>
+        </td>
+
+        <td className="px-6 py-4 text-center whitespace-nowrap">
+          <div className="relative">
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              className="rounded-md p-2 transition-colors hover:bg-gray-100"
+            >
+              <HiEllipsisVertical className="h-4 w-4 text-gray-500" />
+            </button>
+
+            {showMenu && <Menus setShowMenu={setShowMenu} />}
+          </div>
+        </td>
+      </tr>
+    </>
   );
-}
+};
 
 export default MembersRow;

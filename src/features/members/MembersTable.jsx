@@ -13,19 +13,19 @@ function MembersTable() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-slate-200 bg-gradient-to-r from-slate-50 to-slate-100">
-              <th className="w-16 px-4 py-3 text-center font-semibold text-slate-700">
+              <th className="px-4 py-3 text-center font-semibold text-slate-700">
                 NO
               </th>
-              <th className="w-32 px-4 py-3 text-center font-semibold text-slate-700">
+              <th className="px-4 py-3 text-center font-semibold text-slate-700">
                 Photo
               </th>
               <th className="px-4 py-3 text-left font-semibold text-slate-700">
                 Name
               </th>
-              <th className="w-56 px-4 py-3 text-left font-semibold text-slate-700">
+              <th className="px-4 py-3 text-left font-semibold text-slate-700">
                 Department
               </th>
-              <th className="w-20 px-4 py-3 text-center font-semibold text-slate-700">
+              <th className="px-4 py-3 text-center font-semibold text-slate-700">
                 Year
               </th>
               <th className="px-4 py-3 text-left font-semibold text-slate-700">
@@ -34,7 +34,7 @@ function MembersTable() {
               <th className="px-4 py-3 text-center font-semibold text-slate-700">
                 Participation
               </th>
-              <th className="w-16 px-4 py-3 text-center font-semibold text-slate-700">
+              <th className="px-4 py-3 text-center font-semibold text-slate-700">
                 Action
               </th>
             </tr>
