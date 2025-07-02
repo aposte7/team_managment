@@ -11,7 +11,6 @@ export async function getMembers() {
 }
 
 export async function createMember(newMember) {
-  console.log("new member", newMember);
   const imageName =
     `${Math.random()}-${newMember.profilePicture.name}`.replaceAll("/", "");
 
@@ -42,7 +41,7 @@ export async function createMember(newMember) {
     await supabaseClient.from("members").delete().eq("id", data.id);
     console.error(storageError);
     throw new Error(
-      "member image could not be uploaded and the member was not created",
+      "Member image could not be uploaded and the member was not created",
     );
   }
 
