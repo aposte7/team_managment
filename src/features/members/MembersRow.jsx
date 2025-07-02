@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import Menus from "../../components/Menus";
+import { Link } from "react-router";
 
 const MembersRow = ({ member, rowNumber }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -35,7 +36,9 @@ const MembersRow = ({ member, rowNumber }) => {
       </td>
 
       <td className="px-6 py-3 whitespace-nowrap">
-        <div className="text-sm font-medium text-gray-900">{member.name}</div>
+        <Link to={`${member.id}`} className="text-sm font-medium text-gray-900">
+          {member.name}
+        </Link>
       </td>
 
       <td className="px-6 py-3 whitespace-nowrap">
