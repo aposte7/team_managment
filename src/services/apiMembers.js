@@ -47,3 +47,18 @@ export async function createMember(newMember) {
 
   return data;
 }
+
+export async function getMember(memberId) {
+  const { data, error } = supabaseClient
+    .from("members")
+    .select()
+    .eq("id", memberId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Member could not be loaded");
+  }
+
+  return data;
+}
