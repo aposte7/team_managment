@@ -4,7 +4,6 @@ export async function getMembers() {
   const { data, error } = await supabaseClient.from("members").select("*");
 
   if (error) {
-    console.error(error);
     throw new Error("Members could not be loaded");
   }
 
@@ -16,8 +15,6 @@ export async function createMember(newMember) {
   const imageName =
     `${Math.random()}-${newMember.profilePicture.name}`.replaceAll("/", "");
 
-  const memberName = `${newMember.firstName} ${newMember.fatherName}`;
-
   delete newMember.firstName;
   delete newMember.fatherName;
 
@@ -25,7 +22,7 @@ export async function createMember(newMember) {
 
   let query = supabaseClient
     .from("members")
-    .insert([{ ...newMember, name: memberName, profilePicture: imagePath }]);
+    .insert([{ ...newMember, profilePicture: imagePath }]);
 
   // create members
   const { data, error } = await query.select().single();

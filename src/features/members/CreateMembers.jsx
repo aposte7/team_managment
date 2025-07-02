@@ -83,36 +83,24 @@ function CreateMembers({ closeModal }) {
               <div className="space-y-6">
                 {/* Basic input form */}
                 <div className="grid grid-cols-1 justify-center gap-4 md:grid-cols-2">
-                  <FormFields label="First Name">
+                  <FormFields className="md:col-span-2" label="Name *">
                     <input
-                      {...register("firstName")}
-                      id="firstName"
+                      {...register("name")}
+                      id="name"
                       type="text"
-                      placeholder="e.g. John"
-                      className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
-                    />
-                  </FormFields>
-                  <FormFields label="Father Name">
-                    <input
-                      {...register("fatherName")}
-                      id="fatherName"
-                      type="text"
-                      placeholder="e.g. Doe"
-                      className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                      placeholder="e.g. Abdi Jira"
+                      className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                     />
                   </FormFields>
 
                   <FormFields label="Phone Number">
                     <div id="phone" className="flex items-center">
-                      <span className="mt-1 inline-flex items-center rounded-l-md border bg-gray-100 px-3 py-[8px] text-gray-500">
-                        +251
-                      </span>
                       <input
                         {...register("phoneNumber")}
                         id="phoneNumber"
                         type="text"
-                        placeholder="955485444"
-                        className="mt-1 w-full rounded-r-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                        placeholder="eg. 0955485444"
+                        className="mt-1 w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
                       />
                     </div>
                   </FormFields>
@@ -133,7 +121,7 @@ function CreateMembers({ closeModal }) {
                           key={year}
                           type="button"
                           onClick={() => setValue("academicYear", year)}
-                          className={`h-10 rounded-md border font-semibold transition-all duration-200 ${
+                          className={`h-10 rounded-md border font-semibold transition-all duration-200 hover:bg-blue-200 ${
                             selectedYear === year
                               ? "bg-blue-600 text-white"
                               : "border-gray-300 bg-white"
