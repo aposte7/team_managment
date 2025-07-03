@@ -49,7 +49,7 @@ export async function createMember(newMember) {
 }
 
 export async function getMember(memberId) {
-  const { data, error } = supabaseClient
+  const { data, error } = await supabaseClient
     .from("members")
     .select()
     .eq("id", memberId)
