@@ -6,24 +6,33 @@ import {
   FiTrendingUp,
   FiCalendar,
 } from "react-icons/fi";
+import { useMember } from "./useMember";
+import Spinner from "../../components/Spinners";
 
 const MemberDetail = () => {
+  const { member, isLoading } = useMember();
+
+  if (isLoading) return <Spinner />;
+
   return (
     <div className="mx-auto p-6">
       {/* Header */}
+
       <div className="rounded-t-xl bg-gradient-to-r from-cyan-600 to-purple-600 p-8 text-white shadow-lg">
         <div className="flex items-center space-x-6">
-          <div className="flex h-44 w-44 items-center justify-center rounded-full bg-yellow-400 text-3xl font-bold text-white shadow-md">
-            OG
+          <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-yellow-400 text-3xl font-bold text-white shadow-md">
+            <img
+              src={member.profilePicture}
+              className="h-full w-full object-cover"
+              alt={`${member.name}'s profile picture`}
+            />
           </div>
           <div>
             <h1 className="text-2xl font-bold">Olman Gemechu</h1>
-            <p className="text-sm text-white/90">
-              Software Engineering Student
-            </p>
+            <p className="text-sm text-white/90">{member.department}</p>
             <div className="mt-2 flex gap-2 text-sm">
               <span className="rounded-full bg-white/20 px-3 py-1">
-                3rd Year
+                {`${member.academicYear} year`}
               </span>
               <span className="rounded-full bg-white/20 px-3 py-1">
                 Active Member
@@ -43,12 +52,12 @@ const MemberDetail = () => {
           <InfoCard
             icon={<FiPhone size={20} />}
             label="Phone Number"
-            value="0967467842"
+            value={member.phoneNumber}
           />
           <InfoCard
             icon={<FiSend size={20} />}
             label="Telegram"
-            value="@badind88"
+            value={member.telegram}
           />
         </div>
       </div>
@@ -58,13 +67,13 @@ const MemberDetail = () => {
         <DetailCard
           icon={<FiMapPin size={23} className="text-white" />}
           title="Previous Church"
-          value="Mulu Wengele Church"
+          value={member.previousChurch}
           color="from-green-400 to-green-600"
         />
         <DetailCard
           icon={<FiUsers size={23} className="text-white" />}
           title="Previous Service"
-          value="Evangelism Team"
+          value={member.previousService}
           color="from-blue-400 to-blue-600"
         />
         <DetailCard
@@ -76,7 +85,7 @@ const MemberDetail = () => {
         <DetailCard
           icon={<FiCalendar size={23} className="text-white" />}
           title="Academic Year"
-          value="3rd Year"
+          value={member.academicYear}
           color="from-pink-400 to-purple-500"
         />
       </div>
