@@ -8,24 +8,48 @@ import {
 } from "react-icons/fi";
 import { useMember } from "./useMember";
 import Spinner from "../../components/Spinners";
+import { FaArrowLeft, FaArrowLeftLong } from "react-icons/fa6";
+import { useNavigate } from "react-router";
+import { BsChevronBarLeft } from "react-icons/bs";
+import { HiArrowLeft } from "react-icons/hi2";
 
 const MemberDetail = () => {
   const { member, isLoading } = useMember();
+  const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
 
-  return (
-    <div className="mx-auto p-6">
-      {/* Header */}
+  let placeHolderName = "";
+  if (member.name) {
+    const nameParts = member.name.trim().split(/\s+/);
+    placeHolderName = nameParts
+      .map((part) => part[0]?.toUpperCase())
+      .slice(0, 2)
+      .join("");
+  }
 
+  return (
+    <div className="mx-auto bg-white p-6">
+      {/* Header */}
+      <button
+        type="button"
+        onClick={() => navigate(-1)}
+        className="flex cursor-pointer items-center gap-3 pb-6 text-gray-900 hover:text-gray-500"
+      >
+        <HiArrowLeft size={25} strokeWidth={0.3} />
+      </button>
       <div className="rounded-t-xl bg-gradient-to-r from-cyan-600 to-purple-600 p-8 text-white shadow-lg">
         <div className="flex items-center space-x-6">
           <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-yellow-400 text-3xl font-bold text-white shadow-md">
-            <img
-              src={member.profilePicture}
-              className="h-full w-full object-cover"
-              alt={`${member.name}'s profile picture`}
-            />
+            {member.profilePicture ? (
+              <img
+                src={member.profilePicture}
+                className="h-full w-full object-cover"
+                alt={`${member.name}'s profile picture`}
+              />
+            ) : (
+              <p className="text-5xl">{placeHolderName}</p>
+            )}
           </div>
           <div>
             <h1 className="text-2xl font-bold">Olman Gemechu</h1>

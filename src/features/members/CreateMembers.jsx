@@ -55,7 +55,7 @@ function CreateMembers({ closeModal }) {
   const tabs = ["basic", "additional"];
 
   return (
-    <div className="relative w-full overflow-y-auto rounded-lg bg-white">
+    <div className="relative w-full overflow-y-auto border-t border-t-gray-200 bg-white">
       <div className="px-6 py-6">
         <div className="mb-5 flex gap-2">
           {tabs.map((tab) => (

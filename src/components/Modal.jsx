@@ -4,14 +4,14 @@ import { GrClose } from "react-icons/gr";
 
 const FormContext = createContext();
 
-function Model({ children }) {
-  const [modelName, setModelName] = useState("");
+function Modal({ children }) {
+  const [modalName, setModalName] = useState("");
 
-  const openModal = setModelName;
-  const closeModal = () => setModelName("");
+  const openModal = setModalName;
+  const closeModal = () => setModalName("");
 
   return (
-    <FormContext.Provider value={{ openModal, closeModal, modelName }}>
+    <FormContext.Provider value={{ openModal, closeModal, modalName }}>
       {children}
     </FormContext.Provider>
   );
@@ -23,14 +23,14 @@ function Open({ name, children }) {
 }
 
 function View({ name, children, title }) {
-  const { closeModal, modelName } = useContext(FormContext);
+  const { closeModal, modalName } = useContext(FormContext);
 
-  if (modelName != name) return null;
+  if (modalName != name) return null;
 
   return createPortal(
     <div className="fixed inset-0 z-50 h-dvh w-full bg-black/50">
-      <div className="absolute top-1/2 left-1/2 h-fit -translate-1/2 rounded-lg bg-white">
-        <div className="flex items-center justify-between border-b border-b-gray-200 p-6">
+      <div className="absolute top-1/2 left-1/2 h-fit -translate-1/2 overflow-hidden rounded-lg bg-white">
+        <div className="flex items-center justify-between p-6">
           {title && (
             <h3 className="text-2xl font-semibold text-gray-800 capitalize">
               {title}
@@ -52,7 +52,7 @@ function View({ name, children, title }) {
   );
 }
 
-export default Model;
+export default Modal;
 
-Model.Open = Open;
-Model.View = View;
+Modal.Open = Open;
+Modal.View = View;
