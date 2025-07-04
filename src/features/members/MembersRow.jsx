@@ -93,7 +93,7 @@ const MembersRow = ({ member, rowNumber }) => {
                 <EditMember member={member} />
               </Modal.View>
               <Modal.View title="Delete Member" name="delete-member">
-                <PopupConfirm />
+                <PopupConfirm onConfirm={() => deleteMember(member.id)} />
               </Modal.View>
             </div>
           </td>

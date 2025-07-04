@@ -1,4 +1,4 @@
-function PopupConfirm() {
+function PopupConfirm({ closeModal, onConfirm }) {
   return (
     <div className="bg-white px-6 pb-4">
       <p className="mb-8 text-start [text-align-last:center]">
@@ -6,10 +6,18 @@ function PopupConfirm() {
       </p>
 
       <div className="flex justify-end gap-5">
-        <button className="rounded-md bg-blue-100 px-3.5 py-2 text-gray-800 transition-all hover:bg-blue-200">
+        <button
+          type="button"
+          onClick={closeModal}
+          className="rounded-md bg-blue-100 px-3.5 py-2 text-gray-800 transition-all hover:bg-blue-200"
+        >
           Cancle
         </button>
-        <button className="rounded-md bg-orange-600 px-3.5 py-2 text-white transition-all hover:bg-orange-700">
+        <button
+          type="button"
+          onClick={onConfirm}
+          className="rounded-md bg-orange-600 px-3.5 py-2 text-white transition-all hover:bg-orange-700"
+        >
           Confirm
         </button>
       </div>
