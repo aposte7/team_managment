@@ -62,3 +62,17 @@ export async function getMember(memberId) {
 
   return data;
 }
+
+export async function deleteMember(memberId) {
+  const { data, error } = await supabaseClient
+    .from("members")
+    .delete()
+    .eq("id", memberId);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Member could not be deleted");
+  }
+
+  return data;
+}
