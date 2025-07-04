@@ -35,17 +35,92 @@ function TableOperation() {
               className="right-0 w-full"
               id="member-filter"
             >
-              <Menus.Toggle id="filter-by-year">
-                <Menus.Button noOnClick={true} label="Year" />
-              </Menus.Toggle>
+              <Menus>
+                <Menus.Toggle id="filter-by-year">
+                  <Menus.Button label="Year" />
+                </Menus.Toggle>
 
-              <Menus.Button label="Department" />
-              <Menus.Button label="Batch" />
+                <Menus.Toggle id="filter-by-department">
+                  <Menus.Button label="Department" />
+                </Menus.Toggle>
+
+                <Menus.Toggle id="filter-by-batch">
+                  <Menus.Button label="Batch" />
+                </Menus.Toggle>
+
+                <Menus.MenuViews
+                  className="top-[37px] right-30 w-full space-y-1"
+                  id="filter-by-year"
+                >
+                  <Menus.Button
+                    label={
+                      <span>
+                        1<sup>st</sup> Year
+                      </span>
+                    }
+                  />
+                  <Menus.Button
+                    label={
+                      <span>
+                        2<sup>nd</sup> Year
+                      </span>
+                    }
+                  />
+                  <Menus.Button
+                    label={
+                      <span>
+                        3<sup>rd</sup> Year
+                      </span>
+                    }
+                  />
+                  <Menus.Button
+                    label={
+                      <span>
+                        4<sup>th</sup> Year
+                      </span>
+                    }
+                  />
+                  <Menus.Button
+                    label={
+                      <span>
+                        5<sup>th</sup> Year
+                      </span>
+                    }
+                  />
+                </Menus.MenuViews>
+
+                <Menus.MenuViews
+                  className="top-[48px] right-30 w-44 space-y-1"
+                  id="filter-by-department"
+                >
+                  <div className="px-1">
+                    <input
+                      placeholder="search"
+                      className="mb-2 w-full rounded bg-white px-2 py-1 outline-1 outline-gray-300"
+                      type="text"
+                    />
+                    <div className="flex gap-2 text-xs text-black transition-all duration-300">
+                      <div className="rounded bg-gray-200 px-2 py-1 hover:bg-blue-200">
+                        Applied
+                      </div>
+                      <div className="rounded bg-gray-200 px-2 py-1 transition-all duration-300 hover:bg-blue-200">
+                        Engineering
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="h-[88px] overflow-y-scroll">
+                    <Menus.Button label="Software Engine.." />
+                    <Menus.Button label="Mining Engineering.." />
+                    <Menus.Button label="Civil Engineering" />
+                  </div>
+                </Menus.MenuViews>
+              </Menus>
             </Menus.MenuViews>
 
             <Menus.MenuViews
               className="top-[67px] right-30 w-44 space-y-1"
-              id="filter-by-year"
+              id="filter-by-department"
             >
               <div className="px-1">
                 <input

@@ -52,7 +52,7 @@ const MemberDetail = () => {
             )}
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Olman Gemechu</h1>
+            <h1 className="text-2xl font-bold">{member.name}</h1>
             <p className="text-sm text-white/90">{member.department}</p>
             <div className="mt-2 flex gap-2 text-sm">
               <span className="rounded-full bg-white/20 px-3 py-1">

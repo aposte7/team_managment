@@ -72,7 +72,7 @@ function MenuViews({ id, children, className = "", clickOutside = false }) {
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
-        className={`absolute z-20 mt-2 rounded-md border border-gray-200 bg-white py-2 shadow-lg ${className}`}
+        className={`absolute z-20 mt-0.5 rounded-md border border-gray-200 bg-white py-2 shadow-lg ${className}`}
       >
         {children}
       </div>
