@@ -44,7 +44,7 @@ function CreateMembers({ closeModal }) {
       { ...data, profilePicture: image },
 
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           reset();
           closeModal();
         },
@@ -257,9 +257,10 @@ function CreateMembers({ closeModal }) {
                   <button
                     type="button"
                     className="rounded-md bg-gray-100 px-4 py-2 hover:bg-gray-200"
-                    onClick={() =>
-                      setActiveTab(tabs[tabs.indexOf(activeTab) - 1])
-                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveTab(tabs[tabs.indexOf(activeTab) - 1]);
+                    }}
                   >
                     Previous
                   </button>
@@ -268,7 +269,10 @@ function CreateMembers({ closeModal }) {
               <div className="flex gap-3">
                 <button
                   type="button"
-                  onClick={() => closeModal()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeModal();
+                  }}
                   className="rounded-md border border-gray-300 bg-white px-4 py-2 hover:bg-gray-100"
                 >
                   Cancel
@@ -277,18 +281,20 @@ function CreateMembers({ closeModal }) {
                   <button
                     type="button"
                     className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-                    onClick={() =>
-                      setActiveTab(tabs[tabs.indexOf(activeTab) + 1])
-                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveTab(tabs[tabs.indexOf(activeTab) + 1]);
+                    }}
                   >
                     Next
                   </button>
                 ) : (
                   <button
+                    onClick={() => console.log("click no click")}
                     type="submit"
                     className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
                   >
-                    Create Member
+                    Confirm
                   </button>
                 )}
               </div>
