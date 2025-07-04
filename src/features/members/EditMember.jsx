@@ -21,7 +21,7 @@ function EditMember({ closeModal, member = {} }) {
     formState: { errors },
   } = useForm({ defaultValues: isEditing ? editValues : {} });
 
-  const { isCreating, editMemberMutation } = useEditMember();
+  const { isEditingApi, editMemberMutation } = useEditMember();
 
   const selectedYear = watch("academicYear");
 
@@ -81,7 +81,7 @@ function EditMember({ closeModal, member = {} }) {
           ))}
         </div>
 
-        {isCreating ? (
+        {isEditingApi ? (
           <Spinner />
         ) : (
           <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>

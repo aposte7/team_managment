@@ -16,7 +16,7 @@ function MembersTable() {
               <th className="px-4 py-3 text-center font-semibold text-slate-700">
                 NO
               </th>
-              <th className="px-4 py-3 text-center font-semibold text-slate-700">
+              <th className="px-4 py-3 text-left font-semibold text-slate-700">
                 Photo
               </th>
               <th className="px-4 py-3 text-left font-semibold text-slate-700">

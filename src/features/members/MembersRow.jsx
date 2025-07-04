@@ -22,11 +22,11 @@ const MembersRow = ({ member, rowNumber }) => {
     <Modal>
       <Menus>
         <tr className="divide-y divide-slate-100 transition-colors hover:bg-gray-50">
-          <td className="px-6 py-3 text-center whitespace-nowrap">
+          <td className="px-4 py-3 text-center whitespace-nowrap">
             <div className="text-sm font-medium text-gray-900">{rowNumber}</div>
           </td>
 
-          <td className="px-6 py-3 whitespace-nowrap">
+          <td className="px-4 py-3 whitespace-nowrap">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-orange-600">
               {member.profilePicture ? (
                 <img
@@ -42,7 +42,7 @@ const MembersRow = ({ member, rowNumber }) => {
             </div>
           </td>
 
-          <td className="px-6 py-3 whitespace-nowrap">
+          <td className="px-4 py-3 whitespace-nowrap">
             <Link
               to={`${member.id}`}
               className="text-sm font-medium text-gray-900"
@@ -51,25 +51,25 @@ const MembersRow = ({ member, rowNumber }) => {
             </Link>
           </td>
 
-          <td className="px-6 py-3 whitespace-nowrap">
+          <td className="px-4 py-3 whitespace-nowrap">
             <div className="text-sm text-gray-600">{member.department}</div>
           </td>
 
-          <td className="px-6 py-3 text-center whitespace-nowrap">
+          <td className="px-4 py-3 text-center whitespace-nowrap">
             <div className="text-sm text-gray-600">{member.academicYear}</div>
           </td>
 
-          <td className="px-6 py-3 whitespace-nowrap">
+          <td className="px-4 py-3 text-left whitespace-nowrap">
             <div className="text-sm text-gray-600">{member.phoneNumber}</div>
           </td>
 
-          <td className="px-6 py-3 text-center whitespace-nowrap">
+          <td className="px-4 py-3 text-center whitespace-nowrap">
             <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
               3.5 GPA
             </span>
           </td>
 
-          <td className="px-6 py-3 text-center whitespace-nowrap">
+          <td className="px-4 py-3 text-center whitespace-nowrap">
             <div className="relative">
               <Menus.Toggle id={member.id}>
                 <button className="rounded-md p-2 transition-colors hover:bg-gray-100">
