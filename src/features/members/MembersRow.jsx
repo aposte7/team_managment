@@ -76,7 +76,7 @@ const MembersRow = ({ member, rowNumber }) => {
                   <HiEllipsisVertical className="h-4 w-4 text-gray-500" />
                 </button>
               </Menus.Toggle>
-              <Menus.MenuViews id={member.id}>
+              <Menus.MenuViews id={member.id} className="right-0 w-40">
                 <Modal.Open name="edit-member">
                   <Menus.Button label="Edit" Icon={<FiEdit size={17} />} />
                 </Modal.Open>
