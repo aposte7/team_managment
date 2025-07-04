@@ -4,7 +4,7 @@ import Modal from "../../components/Modal";
 import PopupConfirm from "../../components/PopupConfirm";
 import { Link } from "react-router";
 import { useDeleteMember } from "./useDeleteMember";
-import CreateMembers from "./CreateMembers";
+import EditMember from "./EditMember";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
@@ -90,7 +90,7 @@ const MembersRow = ({ member, rowNumber }) => {
               </Menus.MenuViews>
 
               <Modal.View title="Edit Member" name="edit-member">
-                <CreateMembers />
+                <EditMember member={member} />
               </Modal.View>
               <Modal.View title="Delete Member" name="delete-member">
                 <PopupConfirm />

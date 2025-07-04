@@ -14,9 +14,6 @@ export async function createMember(newMember) {
   const imageName =
     `${Math.random()}-${newMember.profilePicture.name}`.replaceAll("/", "");
 
-  delete newMember.firstName;
-  delete newMember.fatherName;
-
   const imagePath = `${supabaseUrl}/storage/v1/object/public/profile-picture/${imageName}`;
 
   let query = supabaseClient
@@ -72,6 +69,50 @@ export async function deleteMember(memberId) {
   if (error) {
     console.error(error);
     throw new Error("Member could not be deleted");
+  }
+
+  return data;
+}
+
+export async function editMember(memberData) {
+  let query = supabaseClient.from("members");
+  const id = memberData.id;
+  delete memberData.id;
+
+  const hasProfileChanged =
+    memberData?.profilePicture.startsWith?.(supabaseUrl);
+
+  const imageName =
+    `${Math.random()}-${memberData.profilePicture?.name}`.replaceAll("/", "");
+
+  const imagePath = hasProfileChanged
+    ? memberData.profilePicture
+    : `${supabaseUrl}/storage/v1/object/public/profile-picture/${imageName}`;
+
+  query = query
+    .update({ ...memberData, profilePicture: imagePath })
+    .eq("id", id);
+
+  const { data, error } = await query.select().single();
+
+  if (error) {
+    console.log(error);
+    throw new Error("Member information not be edited");
+  }
+
+  if (hasProfileChanged) return data;
+
+  const { error: storageError } = await supabaseClient.storage
+    .from("profile-picture")
+    .upload(imageName, memberData.profilePicture);
+
+  // 3. Delete the cabin IF there was an error uplaoding image
+  if (storageError) {
+    await supabaseClient.from("members").delete().eq("id", data.id);
+    console.error(storageError);
+    throw new Error(
+      "Member's image could not be uploaded and the Member information was not edited",
+    );
   }
 
   return data;
