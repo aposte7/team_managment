@@ -39,7 +39,9 @@ function AppLayout() {
                     </div>
                   </div>  */}
       <SideBar />
-      <main className="bg-blue-50 px-5 pt-4">{<Outlet />}</main>
+      <main className="overflow-y-scroll bg-blue-50 px-5 pt-4">
+        {<Outlet />}
+      </main>
     </div>
   );
 }
