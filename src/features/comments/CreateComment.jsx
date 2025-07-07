@@ -1,6 +1,10 @@
+import { useForm } from "react-hook-form";
 import Menus from "../../components/Menus";
+import FormFields from "../../components/FormFields";
+import { LuX } from "react-icons/lu";
 
 function CreateComment() {
+  const { register, handleSubmit } = useForm();
   return (
     <form
       className="mx-auto w-fit space-y-4 rounded-lg bg-white px-5 py-8"
@@ -8,29 +12,23 @@ function CreateComment() {
     >
       <Menus>
         <div className="flex gap-10">
-          <div className="flex flex-col">
-            <label className="mb-2 text-sm text-gray-700" htmlFor="title">
-              Title *
-            </label>
+          <FormFields label="Title *">
             <input
+              {...register("title")}
               className="h-fit w-[20rem] rounded-md border border-gray-400 px-2 py-1.5 text-gray-600 focus:ring focus:ring-indigo-600 focus:outline-none"
-              id="title"
               type="text"
               placeholder="title"
             />
-          </div>
-
-          <div className="flex flex-col">
-            <label className="mb-2 text-sm text-gray-700" htmlFor="subtitle">
-              Subtitle
-            </label>
+          </FormFields>
+          <FormFields label="Subtitle ">
             <input
+              {...register("subtitle")}
               className="h-fit w-[20rem] rounded-md border border-gray-400 px-2 py-1.5 text-gray-600 focus:ring focus:ring-indigo-600 focus:outline-none"
               id="subtitle"
               type="text"
               placeholder="subtitle"
             />
-          </div>
+          </FormFields>
         </div>
         <div className="relative flex w-fit flex-col">
           <label className="mb-2 text-sm text-gray-700" htmlFor="tags">
@@ -39,6 +37,7 @@ function CreateComment() {
           <div className="flex gap-10">
             <Menus.Toggle id="comment-tags">
               <input
+                {...register("comment-tags")}
                 className="h-fit w-[20rem] rounded-md border border-gray-400 px-2 py-1.5 text-gray-600 focus:ring focus:ring-indigo-600 focus:outline-none"
                 id="tags"
                 type="text"
@@ -86,17 +85,16 @@ function CreateComment() {
         </div>
 
         <div className="flex flex-col">
-          <label className="mb-2 text-sm text-gray-700" htmlFor="description">
-            Description *
-          </label>
-          <textarea
-            rows="4"
-            cols="90"
-            className="w-fit rounded-md border border-gray-400 px-2 py-1.5 text-gray-600 focus:ring focus:ring-indigo-600 focus:outline-none"
-            id="description"
-            type="text"
-            placeholder="description"
-          ></textarea>
+          <FormFields label="Description *">
+            <textarea
+              rows="4"
+              cols="90"
+              className="w-fit rounded-md border border-gray-400 px-2 py-1.5 text-gray-600 focus:ring focus:ring-indigo-600 focus:outline-none"
+              id="description"
+              type="text"
+              placeholder="description"
+            ></textarea>
+          </FormFields>
         </div>
 
         <div className="flex flex-col">
