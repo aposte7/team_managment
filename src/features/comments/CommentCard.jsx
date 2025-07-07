@@ -1,21 +1,20 @@
-function CommentCard() {
+function CommentCard({ comment }) {
+  const date = new Date(comment.created_at).toLocaleString();
+
   return (
     <div className="max-w-[50rem] rounded-lg border border-gray-300 bg-white px-4 py-3 shadow-sm">
       <div className="flex items-start justify-between text-gray-700">
         <div>
-          <p className="text-base font-semibold">Title of Comment</p>
-          <p className="text-sm text-gray-500">Subtitle content</p>
+          <p className="text-base font-semibold">{comment?.title}</p>
+          <p className="text-sm text-gray-500">{comment?.subtitle}</p>
         </div>
         <p className="text-xs whitespace-nowrap text-gray-400">
-          Last updated: 12-02-2025
+          Last updated: {date}
         </p>
       </div>
 
       <p className="comment mt-3 max-h-11 w-full overflow-clip text-sm text-ellipsis text-gray-800">
-        It includes a comprehensive collection of prebuilt components ready for
-        use in production and customizable to match your design system. use in
-        production and customizable to match your design system. use in
-        production and customizable to match your design system.
+        {comment.description}
       </p>
 
       <div className="mt-4 flex items-center justify-between text-sm">

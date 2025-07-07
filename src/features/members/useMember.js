@@ -12,7 +12,7 @@ export function useMember() {
   } = useQuery({
     queryKey: ["member", memberId],
     queryFn: () => getMember(memberId),
-    retry: false,
+    retry: 3,
   });
 
   return { isLoading, error, member };

@@ -4,9 +4,15 @@ import { Link, useNavigate } from "react-router";
 import CommentCard from "./CommentCard";
 import CreateComment from "./CreateComment";
 import Modal from "../../components/Modal";
+import { useComments } from "./useComments";
+import Spinner from "../../components/Spinners";
 
 function CommentsLayout() {
   const navigate = useNavigate();
+
+  const { isLoading, comments } = useComments();
+
+  if (isLoading) return <Spinner />;
   return (
     <Modal>
       <div className="absolute top-full left-0 h-full w-full rounded-t-xl bg-white transition-all duration-700 ease-in peer-checked:top-0">
@@ -54,11 +60,9 @@ function CommentsLayout() {
 
         {/* Comment Card */}
         <div className="mx-auto mt-3 h-[calc(100%-4rem)] w-fit space-y-3 overflow-y-scroll border-x border-x-slate-300 px-4 py-4">
-          <CommentCard />
-          <CommentCard />
-          <CommentCard />
-          <CommentCard />
-          <CommentCard />
+          {comments.map((comment) => (
+            <CommentCard comment={comment} key={comment.id} />
+          ))}
         </div>
       </div>
     </Modal>
