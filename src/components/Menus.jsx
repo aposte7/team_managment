@@ -24,10 +24,7 @@ function Menus({ children }) {
 function Toggle({ id, children }) {
   const { openMenu, menuId, closeMenu } = useContext(MenuContext);
 
-  function onClick(e) {
-    console.log("id==", id);
-    console.log("menuId===", menuId);
-
+  function onClick() {
     if (id !== menuId) openMenu(id);
     else closeMenu();
   }
@@ -41,7 +38,6 @@ function Button({ Icon, label, onClick, className, noOnClick = false }) {
   const { closeMenu } = useContext(MenuContext);
 
   function handleClick(e) {
-    console.log("button click");
     if (noOnClick) return null;
     e.preventDefault();
     onClick?.();
