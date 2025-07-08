@@ -13,8 +13,9 @@ export async function getComment(memberId) {
   return data;
 }
 
-export async function createComment(newCommentData, memberId) {
+export async function createComment({ newCommentData, memberId }) {
   const { comment, todos = [], tags = [] } = newCommentData;
+  console.log(newCommentData);
 
   const { error: commentError, data: commentData } = await supabaseClient
     .from("comments")
@@ -28,14 +29,14 @@ export async function createComment(newCommentData, memberId) {
 
   const commentId = commentData.id;
 
-  const todosWithCommentId = todos.map((todo) => ({
-    ...todo,
+  const todosWithCommentId = todos.map((task) => ({
+    task,
     comment_id: commentId,
     is_done: false,
   }));
 
   const { error: todosError, data: todosData } = await supabaseClient
-    .from("todos")
+    .from("comment_todos")
     .insert(todosWithCommentId)
     .select();
 

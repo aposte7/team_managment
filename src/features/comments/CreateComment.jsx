@@ -3,24 +3,41 @@ import Menus from "../../components/Menus";
 import FormFields from "../../components/FormFields";
 import { LuX } from "react-icons/lu";
 import { useState } from "react";
+import { useCreateComment } from "./useCreateComment";
+import { useParams } from "react-router";
+import Spinner from "../../components/Spinners";
 
 const defaultTags = ["Spiritual", "Relation", "Secular"];
 
 function CreateComment({ closeModal }) {
-  const { register, handleSubmit } = useForm();
+  const { register, reset, handleSubmit } = useForm();
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
   const [todoInput, setTodoInput] = useState("");
   const [todos, setTodos] = useState([]);
+  const { createComment, isCreating } = useCreateComment();
+  const { memberId } = useParams();
 
   const onSubmit = (data) => {
-    const finalData = {
-      ...data,
-      tags, // from state
-      todos, // from state
+    const newCommentData = {
+      comment: data,
+      tags,
+      todos,
     };
 
-    console.log(finalData);
+    createComment(
+      {
+        newCommentData,
+        memberId,
+      },
+      {
+        onSuccess: () => {
+          reset();
+          closeModal();
+        },
+      },
+    );
+    console.log(newCommentData);
   };
 
   const filteredSuggestions = defaultTags.filter(
@@ -48,6 +65,8 @@ function CreateComment({ closeModal }) {
   function handleRemoveTodo(todo) {
     setTodos((todos) => todos.filter((t) => t !== todo));
   }
+
+  if (isCreating) return <Spinner />;
 
   return (
     <form
@@ -82,11 +101,10 @@ function CreateComment({ closeModal }) {
           <div className="flex gap-10">
             <Menus.Toggle id="comment-tags">
               <input
-                {...register("tags")}
+                id="tags"
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 className="h-fit w-[20rem] rounded-md border border-gray-400 px-2 py-1.5 text-gray-600 focus:ring focus:ring-indigo-600 focus:outline-none"
-                id="tags"
                 type="text"
                 placeholder="tags"
               />
@@ -151,7 +169,7 @@ function CreateComment({ closeModal }) {
           </label>
           <div className="flex w-full rounded-md border border-gray-400 px-2 py-0.5 pe-0.5 focus-within:ring focus-within:ring-indigo-600 focus:outline-none">
             <input
-              {...register("todos")}
+              id="todos"
               className="w-full pe-2 text-gray-600 focus:outline-none"
               type="text"
               value={todoInput}
