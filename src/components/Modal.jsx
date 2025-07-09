@@ -16,19 +16,27 @@ function Modal({ children }) {
     </FormContext.Provider>
   );
 }
-function Open({ name, children }) {
+function Open({ name, children, fn }) {
   const { openModal } = useContext(FormContext);
 
-  return cloneElement(children, { onClick: () => openModal(name) });
+  return cloneElement(children, {
+    onClick: (e) => {
+      openModal(name);
+      fn?.(e);
+    },
+  });
 }
 
 function View({ name, children, title }) {
   const { closeModal, modalName } = useContext(FormContext);
 
-  if (modalName != name) return null;
+  if (modalName !== name) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 h-dvh w-full bg-black/50">
+    <div
+      className="fixed inset-0 z-50 h-dvh w-full bg-black/50"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div className="absolute top-1/2 left-1/2 h-fit -translate-1/2 overflow-hidden rounded-lg bg-white">
         <div className="flex items-center justify-between p-6">
           {title && (
@@ -37,7 +45,7 @@ function View({ name, children, title }) {
             </h3>
           )}
           <button
-            onClick={() => closeModal()}
+            onClick={closeModal}
             className="cursor-pointer rounded-md bg-white p-1.5 hover:bg-gray-100"
           >
             <GrClose size={18} />
@@ -45,7 +53,6 @@ function View({ name, children, title }) {
         </div>
 
         {cloneElement(children, { closeModal })}
-        {/* Add new form */}
       </div>
     </div>,
     document.body,
