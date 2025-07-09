@@ -3,13 +3,17 @@ import supabaseClient from "./supabase";
 export async function getComment(memberId) {
   const { error, data } = await supabaseClient
     .from("comments")
-    .select("*")
+    .select(
+      `
+      *,
+      comment_todos(*)
+    `,
+    )
     .eq("member_id", memberId);
 
   if (error) {
     throw error;
   }
-
   return data;
 }
 
@@ -48,4 +52,19 @@ export async function createComment({ newCommentData, memberId }) {
     comment: commentData,
     todos: todosData,
   };
+}
+
+export async function editComment({ newCommentData, commentId }) {
+  const { comment, todos = [], tags = [] } = newCommentData;
+
+  console.log(comment, "comment data", commentId, "comment ID");
+
+  const { error: updateError, data } = await supabaseClient
+    .from("comments")
+    .update(comment)
+    .eq("id", commentId);
+
+  if (updateError) throw new Error("Could not edit comment");
+
+  return data;
 }
