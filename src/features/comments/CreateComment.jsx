@@ -37,7 +37,6 @@ function CreateComment({ closeModal }) {
         },
       },
     );
-    console.log(newCommentData);
   };
 
   const filteredSuggestions = defaultTags.filter(

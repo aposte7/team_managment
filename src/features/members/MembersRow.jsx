@@ -7,6 +7,7 @@ import { useDeleteMember } from "./useDeleteMember";
 import EditMember from "./EditMember";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Spinner from "../../components/Spinners";
 
 const MembersRow = ({ member, rowNumber }) => {
   const { isDeleting, deleteMember } = useDeleteMember();
@@ -17,6 +18,8 @@ const MembersRow = ({ member, rowNumber }) => {
     if (parts.length === 1) return parts[0][0]?.toUpperCase() || "";
     return (parts[0][0] + parts[1][0]).toUpperCase();
   };
+
+  if (isDeleting) return <Spinner />;
 
   return (
     <Modal>
@@ -65,7 +68,7 @@ const MembersRow = ({ member, rowNumber }) => {
 
           <td className="px-4 py-3 text-center whitespace-nowrap">
             <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
-              3.5 GPA
+              Active{" "}
             </span>
           </td>
 

@@ -3,9 +3,10 @@ import Menus from "../../components/Menus";
 import FormFields from "../../components/FormFields";
 import { LuX } from "react-icons/lu";
 import { useState } from "react";
-import { useParams } from "react-router";
 import Spinner from "../../components/Spinners";
 import { useEditComment } from "./useEditComment";
+import { AiFillEdit } from "react-icons/ai";
+import { FiX } from "react-icons/fi";
 
 const defaultTags = ["Spiritual", "Relation", "Secular"];
 
@@ -15,8 +16,9 @@ function EditComment({ closeModal, commentToEdit = {} }) {
   });
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
-  const [todoInput, setTodoInput] = useState("");
+  const [todoInput, setTodoInput] = useState({ id: "", task: "" }); // can store both todos from DB for edit and from client or new todos
   const [todos, setTodos] = useState([]);
+  const [dbTodos, setDbTodos] = useState(() => commentToEdit?.todos || []);
   const { editComment, isEditing } = useEditComment();
 
   const onSubmit = (data) => {
@@ -24,16 +26,11 @@ function EditComment({ closeModal, commentToEdit = {} }) {
     const newCommentData = {
       comment: data,
       tags,
-      todos,
-    };
-
-    console.log(
-      {
-        newCommentData,
-        commentId: commentToEdit.comment.id,
+      todos: {
+        newTodos: todos,
+        dbTodos,
       },
-      "commmmmmmmmmmmmmmmmmnt",
-    );
+    };
 
     editComment(
       {
@@ -64,19 +61,34 @@ function EditComment({ closeModal, commentToEdit = {} }) {
   };
 
   function handleAddTodo() {
-    const trimmed = todoInput.trim();
-    if (!trimmed || todos.includes(trimmed)) return;
+    if (!todoInput.id) {
+      const trimmed = todoInput.task.trim();
+      if (!trimmed || todos.includes(trimmed)) return;
+      setTodos([...todos, trimmed]);
+    } else {
+      const editedTodoDb = dbTodos.map((todo) =>
+        todo.id === todoInput.id ? { ...todo, task: todoInput.task } : todo,
+      );
 
-    setTodos([...todos, trimmed]);
-    setTodoInput("");
+      setDbTodos(editedTodoDb);
+    }
+    setTodoInput({
+      id: "",
+      task: "",
+    });
   }
 
-  function handleRemoveTodo(todo) {
-    setTodos((todos) => todos.filter((t) => t !== todo));
+  function handleRemoveTodo(todoDel) {
+    const isTodoDb = typeof todoDel === "object";
+    if (isTodoDb) {
+      const modTodoDb = dbTodos.filter((todo) => todo.id !== todoDel.id);
+      setDbTodos(modTodoDb);
+      return;
+    }
+    setTodos((todos) => todos.filter((t) => t !== todoDel));
   }
 
   if (isEditing) return <Spinner />;
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -149,7 +161,7 @@ function EditComment({ closeModal, commentToEdit = {} }) {
                       onClick={() => handleRemoveTag(tag)}
                       type="button"
                     >
-                      <LuX size={15} />
+                      <LuX size={15} color="#f87171" />
                     </button>
                   </p>
                 ))}
@@ -176,13 +188,18 @@ function EditComment({ closeModal, commentToEdit = {} }) {
           <label className="mb-2 text-sm text-gray-700" htmlFor="todos">
             Todo *
           </label>
-          <div className="flex w-full rounded-md border border-gray-400 px-2 py-0.5 pe-0.5 focus-within:ring focus-within:ring-indigo-600 focus:outline-none">
+          <div className="flex w-full items-center justify-between rounded-md border border-gray-400 px-2 py-0.5 pe-0.5 focus-within:ring focus-within:ring-indigo-600 focus:outline-none">
             <input
               id="todos"
-              className="w-full pe-2 text-gray-600 focus:outline-none"
+              className="w-[82.5%] pe-2 text-gray-600 focus:outline-none"
               type="text"
-              value={todoInput}
-              onChange={(e) => setTodoInput(e.target.value)}
+              value={todoInput.task}
+              onChange={(e) =>
+                setTodoInput({
+                  id: todoInput.id,
+                  task: e.target.value,
+                })
+              }
               placeholder="todo"
             />
             <button
@@ -190,26 +207,52 @@ function EditComment({ closeModal, commentToEdit = {} }) {
               onClick={handleAddTodo}
               className="w-fit rounded-md bg-black px-4 py-1.5 text-sm text-white"
             >
-              Add
+              {todoInput.id ? "Update Task" : "Add New Task"}
             </button>
           </div>
 
-          {todos.length > 0 && (
+          {(todos.length !== 0 || dbTodos.length !== 0) && (
             <div className="tags mt-1 max-h-28 w-full space-y-1 overflow-y-scroll rounded-md border border-slate-200 bg-white px-2 py-2 shadow-md">
-              {todos.map((todo, index) => (
-                <p
+              {dbTodos.map((todo, index) => (
+                <div
                   key={index}
-                  className="flex items-center justify-between rounded-md bg-blue-200 py-1 ps-2 pe-1 text-sm"
+                  className="flex items-center justify-between rounded-md bg-blue-50 py-1 ps-2 pe-1 text-sm"
                 >
-                  <span>{todo}</span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveTodo(todo)}
-                    className="ms-2 w-fit cursor-pointer rounded-md bg-orange-700 px-0.5 py-0.5 text-white"
-                  >
-                    <LuX size={20} />
-                  </button>
-                </p>
+                  <p>{todo.task}</p>
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => setTodoInput(todo)}
+                      type="button"
+                      className="ms-2 w-fit cursor-pointer rounded px-0.5 py-0.5 text-blue-400 transition-all duration-300 hover:bg-blue-400 hover:text-gray-200"
+                    >
+                      <AiFillEdit size={22} />
+                    </button>
+                    <button
+                      onClick={() => handleRemoveTodo(todo)}
+                      type="button"
+                      className="ms-2 w-fit cursor-pointer rounded px-0.5 py-0.5 text-rose-400 transition-all duration-300 hover:bg-rose-400 hover:text-white"
+                    >
+                      <FiX size={22} strokeWidth={3} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+              {todos.map((task, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between rounded-md bg-blue-50 py-1 ps-2 pe-1 text-sm"
+                >
+                  <p>{task}</p>
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => handleRemoveTodo(task)}
+                      type="button"
+                      className="ms-2 w-fit cursor-pointer rounded px-0.5 py-0.5 text-rose-400 transition-all duration-300 hover:bg-rose-400 hover:text-white"
+                    >
+                      <FiX size={22} strokeWidth={3} />
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
           )}

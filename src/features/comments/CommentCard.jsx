@@ -39,7 +39,7 @@ function CommentCard({ comment }) {
           >
             {comment.comment_todos?.map((todo, index) => (
               <p
-                key={index}
+                key={todo.id}
                 className="flex items-center justify-between rounded-md bg-blue-200 py-1 ps-2 pe-1 text-sm"
               >
                 <span>{todo.task}</span>
