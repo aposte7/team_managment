@@ -23,19 +23,26 @@ function EditComment({ closeModal, commentToEdit = {} }) {
 
   const onSubmit = (data) => {
     delete data?.id;
+    const trimmedData = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [
+        key,
+        typeof value === "string" ? value.trim() : value,
+      ]),
+    );
+
     const newCommentData = {
-      comment: data,
+      comment: trimmedData,
       tags,
       todos: {
         newTodos: todos,
-        dbTodos,
+        editedTodos: dbTodos,
       },
     };
 
     editComment(
       {
         newCommentData,
-        commentId: commentToEdit.comment.id,
+        dbCommentData: commentToEdit,
       },
       {
         onSuccess: () => {
