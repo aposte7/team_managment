@@ -119,8 +119,8 @@ const MemberDetail = () => {
             />
             <DetailCard
               icon={<FiCalendar size={23} className="text-white" />}
-              title="Academic Year"
-              value={member.academicYear}
+              title="Home Town"
+              value={member.homeTown}
               color="from-pink-400 to-purple-500"
             />
           </div>

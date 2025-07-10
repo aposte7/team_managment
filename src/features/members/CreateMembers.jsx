@@ -114,14 +114,17 @@ function CreateMembers({ closeModal }) {
                     />
                   </FormFields>
 
-                  <FormFields className="col-span-2" label="Academic Year *">
-                    <div id="academicYear" className="grid grid-cols-8 gap-2">
+                  <FormFields label="Academic Year *">
+                    <div
+                      className="flex items-center justify-between"
+                      id="academicYear"
+                    >
                       {[1, 2, 3, 4, 5].map((year) => (
                         <button
                           key={year}
                           type="button"
                           onClick={() => setValue("academicYear", year)}
-                          className={`h-10 rounded-md border font-semibold transition-all duration-200 hover:bg-blue-200 ${
+                          className={`h-10 w-10 rounded-md border font-semibold transition-all duration-200 hover:bg-blue-200 ${
                             selectedYear === year
                               ? "bg-blue-600 text-white"
                               : "border-gray-300 bg-white"
@@ -131,6 +134,15 @@ function CreateMembers({ closeModal }) {
                         </button>
                       ))}
                     </div>
+                  </FormFields>
+
+                  <FormFields label="Home Town">
+                    <input
+                      {...register("homeTown")}
+                      type="text"
+                      placeholder="Shambuu"
+                      className="mt-1 w-64 max-w-full rounded-md px-3 py-2 outline outline-gray-500 focus:outline-2 focus:outline-blue-500"
+                    />
                   </FormFields>
 
                   <div className="col-span-2 grid-cols-1 grid-rows-2 space-x-10">

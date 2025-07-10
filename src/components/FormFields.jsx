@@ -1,6 +1,6 @@
-function FormFields({ children, label, className }) {
+function FormFields({ children, label, className = "" }) {
   return (
-    <div className={`${className} space-y-2`}>
+    <div className={`${className && className} space-y-2`}>
       <label
         htmlFor={
           children.props?.id
