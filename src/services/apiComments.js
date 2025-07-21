@@ -86,8 +86,9 @@ export async function editComment({ newCommentData, dbCommentData }) {
   );
 
   if (deletedTodos.length > 0) {
+    console.log(deletedTodos, "deleted");
     const { error: deleteError } = await supabaseClient
-      .from("todos")
+      .from("comment_todos")
       .delete()
       .in(
         "id",
@@ -104,7 +105,7 @@ export async function editComment({ newCommentData, dbCommentData }) {
 
     if (hasChanges(edTodo, original)) {
       const { error: updateError } = await supabaseClient
-        .from("todos")
+        .from("comment_todos")
         .update({ task: edTodo.task })
         .eq("id", edTodo.id);
 
@@ -121,7 +122,7 @@ export async function editComment({ newCommentData, dbCommentData }) {
     }));
 
     const { error: insertError } = await supabaseClient
-      .from("todos")
+      .from("comment_todos")
       .insert(insertData);
 
     if (insertError) throw new Error("Failed to insert todos");

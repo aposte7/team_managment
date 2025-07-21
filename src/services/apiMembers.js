@@ -1,13 +1,22 @@
+import { PAGE_SIZE } from "../utils/constants";
 import supabaseClient, { supabaseUrl } from "./supabase";
 
-export async function getMembers() {
-  const { data, error } = await supabaseClient.from("members").select("*");
+export async function getMembers({ page }) {
+  let query = supabaseClient.from("members").select("*", { count: "exact" });
+
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     throw new Error("Members could not be loaded");
   }
 
-  return data;
+  return { data, error, count };
 }
 
 export async function createMember(newMember) {

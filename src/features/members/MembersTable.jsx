@@ -1,10 +1,11 @@
-import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 import { useMembers } from "./useMembers";
 import MembersRow from "./MembersRow";
 import Spinner from "../../components/Spinners";
 
+import Pagination from "../../components/Pagination";
+
 function MembersTable() {
-  const { isLoading, members } = useMembers();
+  const { isLoading, members, count } = useMembers();
 
   if (isLoading) return <Spinner />;
   return (
@@ -50,20 +51,8 @@ function MembersTable() {
           </tbody>
           <tfoot>
             <tr className="bg-gradient-to-r from-slate-50 to-slate-100">
-              <td className="px-4" colSpan="2">
-                Page 1 / 14
-              </td>
-              <td colSpan="3"></td>
-
-              <td className="px-4 py-2" colSpan="3">
-                <div className="flex justify-end gap-5 text-white">
-                  <button className="flex items-center gap-2 rounded-md bg-blue-500 px-3 py-2">
-                    <FaLessThan /> <span>Previous</span>
-                  </button>
-                  <button className="flex items-center gap-2 rounded-md bg-blue-500 px-3 py-2">
-                    <span>Next</span> <FaGreaterThan />
-                  </button>
-                </div>
+              <td colSpan="8" className="px-6 py-2">
+                <Pagination count={count} />
               </td>
             </tr>
           </tfoot>
