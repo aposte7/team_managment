@@ -8,6 +8,7 @@ import SettingsPage from "./pages/SettingsPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MemberDetail from "./features/members/MemberDetail";
+import AttendancePage from "./pages/AttendancePage";
 
 const BASE_URL = "admin";
 
@@ -32,6 +33,10 @@ function App() {
             <Route path={`${BASE_URL}/dashboard`} element={<HomePage />} />
             <Route path={`${BASE_URL}/plans`} element={<PlansPage />} />
             <Route path={`${BASE_URL}/members`} element={<MembersPage />} />
+            <Route
+              path={`${BASE_URL}/attendance`}
+              element={<AttendancePage />}
+            />
             <Route
               path={`${BASE_URL}/members/:memberId`}
               element={<MemberDetail />}

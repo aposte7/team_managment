@@ -4,6 +4,7 @@ import { LuSettings } from "react-icons/lu";
 import { RiAdminLine } from "react-icons/ri";
 import { NavLink } from "react-router";
 import CustomNavLink from "./CustomNavLink";
+import { FaRegChartBar } from "react-icons/fa";
 
 const BASE_URL = "admin";
 
@@ -23,6 +24,10 @@ function SideBar() {
         <CustomNavLink to={`${BASE_URL}/members`}>
           <HiOutlineUserGroup size={23} />
           <span> Members</span>
+        </CustomNavLink>
+        <CustomNavLink to={`${BASE_URL}/attendance`}>
+          <FaRegChartBar size={23} />
+          <span> Attendance</span>
         </CustomNavLink>
         <CustomNavLink to={`${BASE_URL}/plans`}>
           <HiOutlineCalendarDays size={23} />
