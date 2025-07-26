@@ -7,7 +7,7 @@ const STATUS_COLORS = {
   E: "bg-yellow-100 text-yellow-800",
 };
 
-function AttendanceRow({ session, attendanceMap, members, row_num }) {
+function AttendanceRow({ member, sessions, attendanceMap, row_num }) {
   const [editingCell, setEditingCell] = useState(null);
   const { editedStatus, setEditedStatus } = useContext(AttendanceContext);
 
@@ -15,10 +15,10 @@ function AttendanceRow({ session, attendanceMap, members, row_num }) {
     <tr>
       <td className="sticky left-0 bg-white px-4 py-2">{row_num}</td>
       <td className="sticky left-[60px] bg-white px-4 py-2 whitespace-nowrap">
-        {new Date(session.date).toLocaleDateString()}
+        {member.name}
       </td>
 
-      {members.map((member) => {
+      {sessions.map((session) => {
         const memberId = member.id;
         const sessionId = session.id;
 
@@ -30,10 +30,11 @@ function AttendanceRow({ session, attendanceMap, members, row_num }) {
         const edited = editedStatus?.[attendanceId];
         const status = edited ?? original;
 
-        const isEditing = editingCell === memberId;
+        const isEditing = editingCell === sessionId;
+        const isEdited = edited !== undefined;
 
         return (
-          <td key={memberId} className="px-4 py-2 text-center">
+          <td key={sessionId} className="relative px-4 py-2 text-center">
             {isEditing ? (
               <div className="flex justify-center gap-1">
                 {["P", "A", "E"].map((s) => (
@@ -56,10 +57,13 @@ function AttendanceRow({ session, attendanceMap, members, row_num }) {
               </div>
             ) : (
               <button
-                onClick={() => setEditingCell(memberId)}
-                className={`inline-block rounded px-2 py-1 text-xs font-medium ${STATUS_COLORS[status]}`}
+                onClick={() => setEditingCell(sessionId)}
+                className={`relative inline-block rounded px-2 py-1 text-xs font-medium ${STATUS_COLORS[status]}`}
               >
                 {status}
+                {isEdited && (
+                  <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-blue-500 ring-1 ring-white" />
+                )}
               </button>
             )}
           </td>
