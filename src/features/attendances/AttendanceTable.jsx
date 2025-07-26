@@ -1,21 +1,31 @@
+import { useContext, useEffect } from "react";
 import Spinner from "../../components/Spinners";
 import { useMembers } from "../members/useMembers";
 import { useSession } from "../sessions/useSession";
 import AttendanceRow from "./AttendanceRow";
 import { useAttendance } from "./useAttendance";
+import { AttendanceContext } from "./Attendance";
 
 function AttendanceTable() {
   const { members, isLoading: membersLoading } = useMembers();
   const { sessions, isLoading: sessionsLoading } = useSession();
   const { attendances, isLoading: attendanceLoading } = useAttendance();
+  const { setSessionLength } = useContext(AttendanceContext);
+
+  useEffect(() => {
+    setSessionLength(sessions?.length);
+  }, [sessions, setSessionLength]);
 
   if (membersLoading || sessionsLoading || attendanceLoading)
     return <Spinner />;
 
   const attendanceMap = {};
   attendances.forEach((a) => {
-    if (!attendanceMap[a.session_id]) attendanceMap[a.session_id] = {};
-    attendanceMap[a.session_id][a.member_id] = a.status;
+    attendanceMap[a.session_id] ??= {};
+    attendanceMap[a.session_id][a.member_id] = {
+      id: a.id,
+      status: a.status,
+    };
   });
 
   return (
