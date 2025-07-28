@@ -15,7 +15,10 @@ function PopupConfirm({ closeModal, onConfirm }) {
         </button>
         <button
           type="button"
-          onClick={onConfirm}
+          onClick={() => {
+            onConfirm();
+            closeModal();
+          }}
           className="rounded-md bg-orange-600 px-3.5 py-2 text-white transition-all hover:bg-orange-700"
         >
           Confirm
