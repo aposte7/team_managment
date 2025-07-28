@@ -8,11 +8,11 @@ export function useDeleteMember() {
     mutationFn: deleteMemberApi,
     onSuccess: () => {
       //   toast.success("Cabin successfully deleted");
-
       queryClient.invalidateQueries({
         queryKey: ["members"],
       });
     },
+    onError: (err) => console.error(err.message),
   });
 
   return { isDeleting, deleteMember };

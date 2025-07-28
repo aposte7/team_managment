@@ -70,13 +70,23 @@ export async function getMember(memberId) {
 }
 
 export async function deleteMember(memberId) {
-  const { data, error } = await supabaseClient
+  const { error: attendanceError } = await supabaseClient
+    .from("attendance")
+    .delete()
+    .eq("member_id", memberId);
+
+  if (attendanceError) {
+    console.error(attendanceError);
+    throw new Error("Could not delete member's attendance");
+  }
+
+  const { data, error: memberError } = await supabaseClient
     .from("members")
     .delete()
     .eq("id", memberId);
 
-  if (error) {
-    console.error(error);
+  if (memberError) {
+    console.error(memberError);
     throw new Error("Member could not be deleted");
   }
 
