@@ -32,3 +32,16 @@ export async function createAttendance(session) {
 
   return data;
 }
+
+export async function updateAttendance(data) {
+  const updates = data.map(({ attendanceId, status }) =>
+    supabaseClient.from("attendance").update({ status }).eq("id", attendanceId),
+  );
+
+  const results = await Promise.all(updates);
+
+  const error = results.find((result) => result.error)?.error;
+  if (error) throw error;
+
+  return data;
+}
