@@ -12,10 +12,6 @@ export default function CreateSession({ closeModal }) {
   const { isCreating, createSessionMutation } = useCreateSession();
 
   function onSubmit(data) {
-    const date = new Date(`${data.date}T00:00:00`).toISOString();
-
-    data = { ...data, date };
-    console.log(data);
     createSessionMutation(data, {
       onSuccess: () => {
         reset();
