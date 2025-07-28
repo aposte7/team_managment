@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AttendanceContext = createContext();
 
 function Attendance({ children }) {
-  const [editedStatus, setEditedStatus] = useState({});
+  const [editedStatus, setEditedStatus] = useState([]);
   const [sessionLength, setSessionLength] = useState("");
   return (
     <AttendanceContext.Provider

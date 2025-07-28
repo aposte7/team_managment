@@ -32,10 +32,10 @@ function AttendanceTable() {
     <table className="min-w-full divide-y divide-gray-200 text-sm">
       <thead className="bg-gray-50">
         <tr>
-          <th className="sticky left-0 bg-gray-50 px-4 py-2 text-left font-medium">
+          <th className="sticky left-0 ml-4 w-fit bg-gray-50 px-4 py-2 text-left font-medium">
             #
           </th>
-          <th className="sticky left-[60px] bg-gray-50 px-4 py-2 text-left font-medium">
+          <th className="sticky left-[40px] w-fit bg-gray-50 px-4 py-2 text-left font-medium">
             Name
           </th>
           {sessions.map((session) => (

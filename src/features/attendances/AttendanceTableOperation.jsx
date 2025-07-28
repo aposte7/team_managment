@@ -4,9 +4,17 @@ import Modal from "../../components/Modal";
 import CreateSession from "../sessions/CreateSession";
 
 function AttendanceTableOperation() {
-  const { editedStatus, sessionLength } = useContext(AttendanceContext);
+  const { editedStatus, setEditedStatus, sessionLength } =
+    useContext(AttendanceContext);
 
-  const hasChanges = Object.keys(editedStatus).length > 0;
+  const hasChanges = editedStatus.length > 0;
+
+  const handleCancel = () => {
+    const confirmReset = window.confirm("Discard all unsaved changes?");
+    if (confirmReset) {
+      setEditedStatus([]);
+    }
+  };
 
   return (
     <Modal>
@@ -17,21 +25,26 @@ function AttendanceTableOperation() {
             Sessions: <strong>{sessionLength}</strong>
           </span>
         </div>
+
         <div className="flex items-center space-x-3">
           {hasChanges && (
-            <span className="rounded bg-yellow-100 px-2 py-1 text-xs text-yellow-800">
-              Unsaved changes:{" "}
-              {
-                Object.entries(editedStatus).flatMap(([, members]) =>
-                  Object.keys(members),
-                ).length
-              }
-            </span>
+            <>
+              <span className="rounded bg-yellow-100 px-2 py-1 text-xs text-yellow-800">
+                Unsaved changes: {editedStatus.length}
+              </span>
+
+              <button
+                className="rounded bg-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-400"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            </>
           )}
 
           <button
             disabled={!hasChanges}
-            className={`transition", rounded px-3 py-1.5 text-sm font-medium ${
+            className={`rounded px-3 py-1.5 text-sm font-medium transition ${
               hasChanges
                 ? "bg-cyan-500 text-white hover:bg-cyan-600"
                 : "cursor-not-allowed bg-gray-200 text-gray-500"
