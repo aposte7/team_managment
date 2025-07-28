@@ -43,9 +43,11 @@ function AttendanceRow({ member, sessions, attendanceMap, row_num }) {
 
         const originalStatus =
           attendanceData?.status ?? session.default_status ?? "A";
-        const edited = editedStatus?.map((ss) => {
-          if (ss.attendanceId == attendanceId) return ss.status;
-        })[0];
+        const editedItem = editedStatus.find(
+          (ss) => ss.attendanceId === attendanceId,
+        );
+        const edited = editedItem?.status;
+
         const currentStatus = edited ?? originalStatus;
 
         const isEditing = editingCell === sessionId;
@@ -58,9 +60,7 @@ function AttendanceRow({ member, sessions, attendanceMap, row_num }) {
               isEditing ? "ring-2 ring-blue-400" : ""
             }`}
           >
-            {!attendanceId ? (
-              <span className="text-xs text-gray-400 italic">N/A</span>
-            ) : isEditing ? (
+            {isEditing ? (
               <div
                 ref={editingRef}
                 className="flex items-center justify-center gap-1"
@@ -70,13 +70,18 @@ function AttendanceRow({ member, sessions, attendanceMap, row_num }) {
                     key={s}
                     aria-label={`Set status to ${s}`}
                     onClick={() => {
-                      setEditedStatus((prev) => [
-                        ...prev,
-                        {
-                          attendanceId,
-                          status: s,
-                        },
-                      ]);
+                      setEditedStatus((prev) => {
+                        const filtered = prev.filter(
+                          (item) => item.attendanceId !== attendanceId,
+                        );
+
+                        if (s === originalStatus) {
+                          return filtered;
+                        }
+
+                        return [...filtered, { attendanceId, status: s }];
+                      });
+
                       setEditingCell(null);
                     }}
                     className={`rounded px-2 py-1 text-xs font-medium ${STATUS_COLORS[s]} transition hover:brightness-95`}
@@ -84,14 +89,6 @@ function AttendanceRow({ member, sessions, attendanceMap, row_num }) {
                     {s}
                   </button>
                 ))}
-                <button
-                  aria-label="Cancel edit"
-                  onClick={() => setEditingCell(null)}
-                  className="ml-1 text-sm text-gray-400 hover:text-gray-600"
-                  title="Cancel"
-                >
-                  ✖
-                </button>
               </div>
             ) : (
               <button
